@@ -13,82 +13,130 @@
   .h3 {
     margin-top: 20px; /* Adjust the value as per your requirements */
   }
+  .custom-wrapper {
+  background-color: pink;
+  width: 900px;
+  height: auto;
+}
+
 </style>
 </head>
 <body>
-<div class="wrapper rounded bg-white">
+<div class="wrapper rounded bg-white custom-wrapper">
+
+
 
 <div class="h3">Add Admin Account</div>
 <p> You can add admin account here.</p>
 
-<?php
-include 'dbcon.php';
 
-if (isset($_GET['user_id']) && isset($_GET['userinfo_id'])) {
-  $user_id = $_GET['user_id'];
-  $userinfo_id = $_GET['userinfo_id'];
+ 
+        <div class="modal-body">
+          <div class="error" id="error" style="display: none;"></div>
+          <div>
+            <label style="margin-bottom: 20px;">Personal Information</label>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mt-md-0 mt-3">
+              <div class="form-group">
+                <label>First Name <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" name="firstname" required>
+              </div>
+            </div>
+            <div class="col-md-6 mt-md-0 mt-3">
+              <div class="form-group">
+                <label>Middle Name</label>
+                <input type="text" class="form-control" name="middlename">
+              </div>
+            </div>
+            <div class="col-md-6 mt-md-0 mt-3">
+              <div class="form-group">
+                <label>Last Name <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" name="lastname" required>
+              </div>
+            </div>
+            <div class="col-md-6 mt-md-0 mt-3">
+              <div class="form-group">
+                <label>Suffix Name</label>
+                <input type="text" class="form-control" name="suffixname">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+          
+            <div class="col-md-6 mt-md-0 mt-3">
+              <div class="form-group">
+                <label>Birthday <span style="color: red;">*</span></label>
+                <input type="date" class="form-control" name="birthday" required>
+              </div>
+            </div>
+            <div class="col-md-6 mt-md-0 mt-3">
+              <div class="form-group">
+                <label>Gender <span style="color: red;">*</span></label>
+                <select class="form-control" name="gender" required>
+                  <option value="" selected hidden>Select Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="prefer">Prefer not to say</option>
+                </select>
+              </div>
+            </div>
+          </div>
 
-  $query = "SELECT tbl_userinfo.user_id, tbl_userinfo.firstname, tbl_userinfo.middlename, tbl_userinfo.lastname, tbl_userinfo.suffix, tbl_userinfo.age, tbl_userinfo.birthday, tbl_enrollment.userinfo_id, tbl_enrollment.admit_type, tbl_enrollment.grade, tbl_enrollment.program, tbl_enrollment.term, tbl_enrollment.lrn, tbl_enrollment.lsa, tbl_user_status.status, tbl_user_level.level,
-  tbl_contactinfo.email, tbl_contactinfo.contact_num, tbl_contactinfo.city, tbl_contactinfo.barangay, tbl_contactinfo.street
-  FROM tbl_userinfo
-  JOIN tbl_enrollment ON tbl_userinfo.user_id = tbl_enrollment.userinfo_id
-  JOIN tbl_user_status ON tbl_userinfo.user_id = tbl_user_status.userinfo_id
-  JOIN tbl_user_level ON tbl_userinfo.user_id = tbl_user_level.userinfo_id
-  JOIN tbl_contactinfo ON tbl_userinfo.user_id = tbl_contactinfo.userinfo_id
-  WHERE tbl_userinfo.user_id = '$user_id' LIMIT 1";
-  $result = mysqli_query($conn, $query);
+          
+          <div class="row">
+            <div class="col-md-6 mt-md-0 mt-3">
+              <div class="form-group">
+                <label>Email <span style="color: red;">*</span></label>
+                <input type="email" class="form-control" name="email" required>
+              </div>
+            </div>
+            <div class="col-md-6 mt-md-0 mt-3">
+              <div class="form-group">
+                <label>Contact Number <span style="color: red;">*</span></label>
+                <input type="tel" class="form-control" name="contact_number" required>
+              </div>
+            </div>
 
-  if ($result && mysqli_num_rows($result) > 0) {
-      $row = mysqli_fetch_assoc($result);
-  } else {
-      echo "No records found in the tbl_userinfo table.";
-      exit();
-  }
-} else {
-  echo "No user ID provided.";
-  exit();
-}
-
-
-  if(isset($_POST['btnSubmit'])){
-    
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $cfpassword = $_POST['cfpassword'];
-    $encrypted = password_hash($password, PASSWORD_DEFAULT);
-
-    //validation here
-
-    $sql = "INSERT INTO tbl_usercredentials (userinfo_id, username, password) VALUES ('$userinfo_id', '$username', '$encrypted')";
-    if($conn->query($sql)){
-        header("Location:admin_pending.php?msg=Student Account Added Successfully");
-        exit();
-    }
-    }
-?>
-
-<div class="form">
-    <form action="" method="POST">
-    <div class="row">
-
-<div class="col-md-6 mt-md-0 mt-3">
-      <label>User Name<span style="color: red;">*</span></label>
-      <input type="text" class="form-control" name="username">
+            <div class="col-md-6 mt-md-0 mt-3">
+  <div class="form-group">
+    <label>Upload Valid ID <span style="color: red;">*</span></label>
+    <input type="file" class="form-control-file" name="valid_id" required>
+  </div>
 </div>
-<div class="col-md-6 mt-md-0 mt-3">
-      <label>Password<span style="color: red;">*</span></label>
-      <input type="password" class="form-control" name="password">
-</div>
-<div class="col-md-6 mt-md-0 mt-3">
-      <label>Confirm Password<span style="color: red;">*</span></label>
-      <input type="password" class="form-control" name="cfpassword">
+            <div class="h3">Current Address</div>
+            <div class="col-md-6 mt-md-0 mt-3">
+              <div class="form-group">
+                <label>Street <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" name="street" required>
+              </div>
+            </div>
+            <div class="col-md-6 mt-md-0 mt-3">
+              <div class="form-group">
+                <label>Barangay <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" name="barangay" required>
+              </div>
+            </div>
+            <div class="col-md-6 mt-md-0 mt-3">
+              <div class="form-group">
+                <label>City <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" name="city" required>
+              </div>
+            </div>
+          </div>
+         
+
+        </div><br>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary" name="btnAdd">Add</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 
-<button class="btn btn-primary mt-3" id="submit-btn" name="btnSubmit" type="submit">Submit</button>
-</form>
-</div>
 
-</div>
 <script>
   $(document).ready(function() {
   $("#submit-btn").click(function() {

@@ -44,7 +44,6 @@
         <div class="body-overlay"></div>
 		
 		<!-------------------------sidebar------------>
-		     <!-- Sidebar  -->
              <nav id="sidebar">
             <div class="sidebar-header">
             <h3><img src="img/logoT.png" class="img-fluid"/><br>T'Boli</br></h3>
@@ -68,22 +67,33 @@
                 </li>
 
                 <li class="">
-                    <a href="admin_upload.php"><i class="fas fa-user"></i><span>Upload Lesson/Content</span></a>
-                </li>
+    <a href="admin_upload.php"><i class="fas fa-upload"></i><span>Upload Lesson/Content</span></a>
+</li>
+
+
+<li class="">
+    <a href="admin_Quiz.php"><i class="fas fa-puzzle-piece"></i><span>Quiz</span></a>
+</li>
 
                 <li class="">
-                    <a href="admin_Quiz.php"><i class="fas fa-user"></i><span>Quiz</span></a>
-                </li>
+    <a href="admin_modulerequest.php"><i class="fas fa-file-alt"></i><span>Module request</span></a>
+</li>
 
-                <li class="">
-                    <a href="admin_modulerequest.php"><i class="fas fa-user"></i><span>Module request</span></a>
-                </li>
                 
+                <li class="">
+                    <a href="admin_assign_teacher.php"><i class="fas fa-user"></i><span>Assign Teacher to Lesson</span></a>
+                </li>
+
+                <li class="">
+    <a href="admin_progress.php"><i class="fas fa-chart-line"></i><span>Progress</span></a>
+</li>
+
               
                 <li class="dropdown">
-                    <a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                        <i class="material-icons">school</i> Reports
-                    </a>
+                <a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+    <i class="fas fa-chart-bar"></i> Reports
+</a>
+
                     
                     <ul class="collapse list-unstyled menu" id="homeSubmenu1">
                         <li>

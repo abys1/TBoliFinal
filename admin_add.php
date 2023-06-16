@@ -121,7 +121,79 @@
                 </li>           
             </ul>          
         </nav>
+        <nav id="sidebar">
+            <div class="sidebar-header">
+            <h3><img src="img/logoT.png" class="img-fluid"/><br>T'Boli</br></h3>
+            </div>
+            <ul class="list-unstyled components">
+			<li  class="active">
+                    <a href="admin_dashboard.php" class="dashboard"><i class="material-icons">dashboard</i>
+					<span>Dashboard</span></a>
+                </li>
+
+                <li class="">
+                    <a href="admin_add.php"><i class="fas fa-user"></i><span>Admin</span></a>
+                </li>
 		
+                <li class="">
+                    <a href="admin_student.php"><i class="fas fa-user"></i><span>Student</span></a>
+                </li>
+
+                <li class="">
+                    <a href="admin_teacher.php"><i class="fas fa-user"></i><span>Teachers</span></a>
+                </li>
+
+                <li class="">
+    <a href="admin_upload.php"><i class="fas fa-upload"></i><span>Upload Lesson/Content</span></a>
+</li>
+
+
+<li class="">
+    <a href="admin_Quiz.php"><i class="fas fa-puzzle-piece"></i><span>Quiz</span></a>
+</li>
+
+                <li class="">
+    <a href="admin_modulerequest.php"><i class="fas fa-file-alt"></i><span>Module request</span></a>
+</li>
+
+                
+                <li class="">
+                    <a href="admin_assign_teacher.php"><i class="fas fa-user"></i><span>Assign Teacher to Lesson</span></a>
+                </li>
+
+                <li class="">
+    <a href="admin_progress.php"><i class="fas fa-chart-line"></i><span>Progress</span></a>
+</li>
+
+              
+                <li class="dropdown">
+                <a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+    <i class="fas fa-chart-bar"></i> Reports
+</a>
+
+                    
+                    <ul class="collapse list-unstyled menu" id="homeSubmenu1">
+                        <li>
+                            <a href="admin_ABM.php">List of Student</a>
+                        </li>
+                        <li>
+                            <a href="admin_STEM.php">List of Teachers</a>
+                        </li>
+                        <li>
+                            <a href="admin_HUMMS.php">List of Area</a>
+                        </li>
+                        <li>
+                            <a href="admin_EIM.php">List of Lesson</a>
+                        </li>
+                        <li>
+                            <a href="admin_FBS.php">List of Class w/Teacher</a>
+                        </li>
+                    </ul>
+                </li>
+                    </ul>
+                </li>           
+            </ul>          
+        </nav>
 		
 		
 		

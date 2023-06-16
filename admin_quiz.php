@@ -272,178 +272,55 @@
     ?>
       <div class="row">
         <div class="col-sm-6 p-0 d-flex justify-content-lg-start justify-content-center">
-          <h2 class="ml-lg-2">Manage Content/Lesson</h2>
+          <h2 class="ml-lg-2">Manage Quiz</h2>
         </div>
         <div class="col-sm-6 p-0 d-flex justify-content-lg-end justify-content-center">
         <a href="#fileUploadModal" class="btn btn-success" data-toggle="modal">
 
-		  <i class="material-icons">&#xE147;</i> <span>Upload Files</span></a>
+		  <i class="material-icons">&#xE147;</i> <span>Add Questions</span></a>
 
         </div>
       </div>
     </div>
-    <?php
-      include 'dbcon.php';
-      $limit = 10; 
-      $page = isset($_GET['page']) ? $_GET['page'] : 1;
-
-      $sqlCount = "SELECT COUNT(*) AS total FROM tbl_userinfo
-             JOIN tbl_user_level ON tbl_user_level.user_level_id = tbl_userinfo.user_id
-             WHERE tbl_user_level.level = 'STUDENT'";
-      $resultCount = mysqli_query($conn, $sqlCount);
-      $rowCount = mysqli_fetch_assoc($resultCount)['total'];
-      $totalPages = ceil($rowCount / $limit);
-      $offset = ($page - 1) * $limit;
-
-      $sql = "SELECT tbl_userinfo.user_id, tbl_userinfo.firstname, tbl_userinfo.middlename, tbl_userinfo.lastname, tbl_userinfo.suffix, tbl_enrollment.userinfo_id, tbl_enrollment.admit_type, tbl_enrollment.grade, tbl_enrollment.program, tbl_enrollment.term, tbl_enrollment.lrn, tbl_enrollment.lsa, tbl_user_status.status, tbl_user_level.level
-              FROM tbl_userinfo
-              JOIN tbl_enrollment ON tbl_userinfo.user_id = tbl_enrollment.userinfo_id
-              JOIN tbl_user_status ON tbl_userinfo.user_id = tbl_user_status.userinfo_id
-              JOIN tbl_user_level ON tbl_userinfo.user_id = tbl_user_level.userinfo_id
-              WHERE tbl_user_level.level = 'STUDENT'
-              LIMIT $limit OFFSET $offset";
-
-      $result = mysqli_query($conn, $sql);
-      ?>
-
-      <table class="table table-striped table-hover" id="student_table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Category</th>
-            <th>Module</th>
-            <th>Points</th>
-            <th>Actions</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>Letters</td>
-                <td>Begginer</td>
-                <td>A</td>
-                <td>Module 01</td>
-                <td>10</td>
-                <td>
-    <a href="admin_subject_activate.php?subject_id=<?php echo $row['subject_id'] ?>" class="confirm">
-        <i class="material-icons" data-toggle="tooltip" title="Confirm">&#xE5CA;</i>
-    </a>
-    <a href="admin_subject_deactivate.php?subject_id=<?php echo $row['subject_id'] ?>" class="decline">
-        <i class="material-icons" data-toggle="tooltip" title="Decline">&#xE5CD;</i>
-    </a>
-</td>
-<td></td>
-
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Numbers</td>
-                <td>Advance</td>
-                <td>01</td>
-                <td>Module 01</td>
-                <td>15</td>
-                <td>
-    <a href="admin_subject_activate.php?subject_id=<?php echo $row['subject_id'] ?>" class="confirm">
-        <i class="material-icons" data-toggle="tooltip" title="Confirm">&#xE5CA;</i>
-    </a>
-    <a href="admin_subject_deactivate.php?subject_id=<?php echo $row['subject_id'] ?>" class="decline">
-        <i class="material-icons" data-toggle="tooltip" title="Decline">&#xE5CD;</i>
-    </a>
-</td>
-<td></td>
-
-<tr>
-                <td>3</td>
-                <td>Practices</td>
-                <td>Intermediate</td>
-                <td>Culture</td>
-                <td>Module 01</td>
-                <td>20</td>
-                <td>
-    <a href="admin_subject_activate.php?subject_id=<?php echo $row['subject_id'] ?>" class="confirm">
-        <i class="material-icons" data-toggle="tooltip" title="Confirm">&#xE5CA;</i>
-    </a>
-    <a href="admin_subject_deactivate.php?subject_id=<?php echo $row['subject_id'] ?>" class="decline">
-        <i class="material-icons" data-toggle="tooltip" title="Decline">&#xE5CD;</i>
-    </a>
-</td>
-<td></td>
-
-            </tr>
-
-            </tr>
-        </tbody>
-    </table>
-
-<div class="clearfix">
-<div class="hint-text">Showing <b><?php echo mysqli_num_rows($result) ?></b> out of <b><?php echo mysqli_num_rows($result) ?></b> entries</div>
-  <ul class="pagination">
-    <?php if ($page > 1): ?>
-      <li class="page-item"><a href="?page=<?php echo ($page - 1) ?>" class="page-link">Previous</a></li>
-    <?php else: ?>
-      <li class="page-item disabled"><span class="page-link">Previous</span></li>
-    <?php endif; ?>
-
-    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-      <li class="page-item <?php if ($i == $page) echo 'active' ?>">
-        <a href="?page=<?php echo $i ?>" class="page-link"><?php echo $i ?></a>
-      </li>
-    <?php endfor; ?>
-
-    <?php if ($page < $totalPages): ?>
-      <li class="page-item"><a href="?page=<?php echo ($page + 1) ?>" class="page-link">Next</a></li>
-    <?php else: ?>
-      <li class="page-item disabled"><span class="page-link">Next</span></li>
-    <?php endif; ?>
-  </ul>
+    <br>
+    <div class="card" style="width: 18rem;">
+  <!-- <img class="card-img-top" src="#" alt="#"> -->
+  <div class="card-body">
+    <h5 class="card-title">Letters Quiz 01</h5>
+    <h5>True or False</h5>
+    <p class="card-text">The answer to this type of question can only be true or false. A correct answer gets full points,
+                              and an incorrect answer gets zero points.</p>
+    <a href="#" class="btn btn-primary">View</a>
+  </div>
+</div> <br>
+<div class="card" style="width: 18rem;">
+  <!-- <img class="card-img-top" src="#" alt="#"> -->
+  <div class="card-body">
+    <h5 class="card-title">Letters Quiz 02</h5>
+    <h5>Multiple Choice</h5>
+    <p class="card-text">The answer to this type of question is selected from a set of choices. A correct answer gets full points,
+                              and an incorrect answer gets zero points.</p>
+    <a href="#" class="btn btn-primary">View</a>
+  </div>
 </div>
-</div>
+      
 
 <!-- Upload Files Modal -->
 <div class="modal fade" id="fileUploadModal" tabindex="-1" aria-labelledby="fileUploadModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="fileUploadModalLabel">Upload Files</h5>
+                    <h5 class="modal-title" id="fileUploadModalLabel">Add Questions</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <form id="upload-form" enctype="multipart/form-data" method="POST">
-                        <div class="mb-3">
-                            <label for="content-type" class="form-label">Type of Content:</label>
-                            <select class="form-control" id="content-type" name="content">
-                                <option value="">Select type of content</option>
-                                <option value="Letters">Letters</option>
-                                <option value="Numbers">Numbers</option>
-                                <option value="Practices">Practices</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="description" class="form-label">Description:</label>
-                            <input type="text" class="form-control" id="description" name="description">
-                        </div>
-                        <div class="mb-3">
-                            <label for="category" class="form-label">Category:</label>
-                            <input type="text" class="form-control" id="category" name="category">
-                        </div>
-                        <div class="mb-3">
-                            <label for="module" class="form-label">Module:</label>
-                            <input type="text" class="form-control" id="module" name="module">
-                        </div>
-                        <div class="mb-3">
-                            <label for="points" class="form-label">Points:</label>
-                            <input type="text" class="form-control" id="points" name="points">
-                        </div>
-                        <div class="mb-3">
-                            <label for="file" class="form-label">File:</label>
-                            <input type="file" class="form-control" id="file" name="file">
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary" name="upload">Upload</button>
+               
+                      
+                <a href="admin_trueorfalse.php" class="btn btn-secondary" data-bs-dismiss="modal">True or False</a>
+<p>The answer to this type of question can only be true or false. A correct answer gets full points, and an incorrect answer gets zero points.</p><br>
+
+<a href="admin_multiplechoice.php" class="btn btn-secondary" data-bs-dismiss="modal">Multiple Choice (One Answer)</a>
+<p>The answer to this type of question is selected from a set of choices. A correct answer gets full points, and an incorrect answer gets zero points.</p>
+
                         </div>
                     </form>
                 </div>

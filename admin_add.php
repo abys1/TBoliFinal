@@ -355,7 +355,7 @@ $result = mysqli_query($conn, $sql);
             <a href="admin_acc_edit.php?user_id=<?php echo $row['user_id']?>&userinfo_id=<?php echo $row['userinfo_id']?>" class="confirm">
                 <i class="material-icons" data-toggle="tooltip" title="Edit">create</i>
             </a>
-            <a href="admin_student_activate.php?user_id=<?php echo $row['user_id']?>" class="confirm">
+            <a href="admin_confirm.php?user_id=<?php echo $row['user_id']?>" class="confirm">
                 <i class="material-icons" data-toggle="tooltip" title="Confirm">&#xE5CA;</i>
             </a>
             <a href="admin_student_deactivate.php?user_id=<?php echo $row['user_id']?>" class="decline">

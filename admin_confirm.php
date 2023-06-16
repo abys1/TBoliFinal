@@ -7,3 +7,4 @@ $updatestatus = "UPDATE tbl_user_status SET status = 1 WHERE userinfo_id = $user
 mysqli_query($conn, $updatestatus);
 header("Location: admin_pending.php?msg=Updated Successfully");
 ?>
+

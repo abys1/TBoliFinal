@@ -1,7 +1,7 @@
-<?php
+<!-- <?php
       session_start();
       $user_id = $_SESSION['user_id'];
-?>
+?> -->
 <!doctype html>
 <html lang="en">
   <head>
@@ -9,7 +9,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-        <title>Admin dashboard</title>
+    <title>Admin dashboard</title>
+
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 	    <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -24,10 +25,29 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 	
-	
+
+        
 	<!--google material icon-->
       <link href="https://fonts.googleapis.com/css2?family=Material+Icons"rel="stylesheet">
+      <style>
+      
+ 
+  /* Adjusted width for modal */
+  #addEmployeeModal .modal-dialog {
+    max-width: 800px;
+    width: 100%;
+    margin: auto;
+  }
+  .active {
+    font-size: 15px;
+  }
+  
+  .inactive {
+    font-size: 15px;
+  }
 
+      </style>
+      
   </head>
   <body>
   
@@ -39,14 +59,18 @@
 		
 		<!-------------------------sidebar------------>
 		     <!-- Sidebar  -->
-         <nav id="sidebar">
+             <nav id="sidebar">
             <div class="sidebar-header">
-                <h3><img src="img/logo.png" class="img-fluid"/><br>Banisil National High School</br></h3>
+            <h3><img src="img/logoT.png" class="img-fluid"/><br>T'Boli</br></h3>
             </div>
             <ul class="list-unstyled components">
 			<li  class="active">
                     <a href="admin_dashboard.php" class="dashboard"><i class="material-icons">dashboard</i>
 					<span>Dashboard</span></a>
+                </li>
+
+                <li class="">
+                    <a href="admin_add.php"><i class="fas fa-user"></i><span>Admin</span></a>
                 </li>
 		
                 <li class="">
@@ -54,50 +78,123 @@
                 </li>
 
                 <li class="">
-                    <a href="admin_subject.php"><i class="fas fa-user"></i><span>Subjects</span></a>
+                    <a href="admin_teacher.php"><i class="fas fa-user"></i><span>Teachers</span></a>
+                </li>
+
+                <li class="">
+                    <a href="admin_upload.php"><i class="fas fa-user"></i><span>Upload Lesson/Content</span></a>
+                </li>
+
+                <li class="">
+                    <a href="admin_Quiz.php"><i class="fas fa-user"></i><span>Quiz</span></a>
+                </li>
+
+                <li class="">
+                    <a href="admin_modulerequest.php"><i class="fas fa-user"></i><span>Module request</span></a>
                 </li>
                 
-                <li class="">
-                    <a href="admin_pending.php"><i class="fas fa-user"></i><span>Pending Enroll Student</span></a>
-                </li>
+               
                 <li class="dropdown">
                     <a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                        <i class="material-icons">school</i> Program/Strand
+                        <i class="material-icons">school</i> Reports
                     </a>
                     
                     <ul class="collapse list-unstyled menu" id="homeSubmenu1">
                         <li>
-                            <a href="admin_ABM.php">ABM</a>
+                            <a href="admin_ABM.php">List of Student</a>
                         </li>
                         <li>
-                            <a href="admin_STEM.php">STEM</a>
+                            <a href="admin_STEM.php">List of Teachers</a>
                         </li>
                         <li>
-                            <a href="admin_HUMMS.php">HUMMS</a>
+                            <a href="admin_HUMMS.php">List of Area</a>
                         </li>
                         <li>
-                            <a href="admin_EIM.php">EIM</a>
+                            <a href="admin_EIM.php">List of Lesson</a>
                         </li>
                         <li>
-                            <a href="admin_FBS.php">FBS</a>
-                        </li>
-                        <li>
-                            <a href="admin_SMAW.php">SMAW</a>
+                            <a href="admin_FBS.php">List of Class w/Teacher</a>
                         </li>
                     </ul>
                 </li>
-
-
                     </ul>
-                </li>
-               
-            
-               
-               
-            </ul>
-
-           
+                </li>           
+            </ul>          
         </nav>
+        <nav id="sidebar">
+            <div class="sidebar-header">
+            <h3><img src="img/logoT.png" class="img-fluid"/><br>T'Boli</br></h3>
+            </div>
+            <ul class="list-unstyled components">
+			<li  class="active">
+                    <a href="admin_dashboard.php" class="dashboard"><i class="material-icons">dashboard</i>
+					<span>Dashboard</span></a>
+                </li>
+
+                <li class="">
+                    <a href="admin_add.php"><i class="fas fa-user"></i><span>Admin</span></a>
+                </li>
+		
+                <li class="">
+                    <a href="admin_student.php"><i class="fas fa-user"></i><span>Student</span></a>
+                </li>
+
+                <li class="">
+                    <a href="admin_teacher.php"><i class="fas fa-user"></i><span>Teachers</span></a>
+                </li>
+
+                <li class="">
+    <a href="admin_upload.php"><i class="fas fa-upload"></i><span>Upload Lesson/Content</span></a>
+</li>
+
+
+<li class="">
+    <a href="admin_Quiz.php"><i class="fas fa-puzzle-piece"></i><span>Quiz</span></a>
+</li>
+
+                <li class="">
+    <a href="admin_modulerequest.php"><i class="fas fa-file-alt"></i><span>Module request</span></a>
+</li>
+
+                
+                <li class="">
+                    <a href="admin_assign_teacher.php"><i class="fas fa-user"></i><span>Assign Teacher to Lesson</span></a>
+                </li>
+
+                <li class="">
+    <a href="admin_progress.php"><i class="fas fa-chart-line"></i><span>Progress</span></a>
+</li>
+
+              
+                <li class="dropdown">
+                <a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+    <i class="fas fa-chart-bar"></i> Reports
+</a>
+
+                    
+                    <ul class="collapse list-unstyled menu" id="homeSubmenu1">
+                        <li>
+                            <a href="admin_ABM.php">List of Student</a>
+                        </li>
+                        <li>
+                            <a href="admin_STEM.php">List of Teachers</a>
+                        </li>
+                        <li>
+                            <a href="admin_HUMMS.php">List of Area</a>
+                        </li>
+                        <li>
+                            <a href="admin_EIM.php">List of Lesson</a>
+                        </li>
+                        <li>
+                            <a href="admin_FBS.php">List of Class w/Teacher</a>
+                        </li>
+                    </ul>
+                </li>
+                    </ul>
+                </li>           
+            </ul>          
+        </nav>
+		
 		
 		
 		
@@ -197,50 +294,50 @@
     </div>';
     }
     ?>
-      <div class="row">
-        <div class="col-sm-6 p-0 d-flex justify-content-lg-start justify-content-center">
-          <h2 class="ml-lg-2">Manage Enroll Student</h2>
-        </div>
-       
-      </div>
+  <div class="row">
+    <div class="col-sm-6 p-0 d-flex justify-content-lg-start justify-content-center">
+        <h2 class="ml-lg-2">Manage Admin</h2>
     </div>
+    <div class="col-sm-6 p-0 d-flex justify-content-lg-end justify-content-center">
+        <a href="admin_add_account.php" class="btn btn-success">
+            <i class="material-icons">&#xE147;</i> <span>Add New Admin</span>
+        </a>
     </div>
-    <?php
-      include 'dbcon.php';
-      $limit = 10; 
-      $page = isset($_GET['page']) ? $_GET['page'] : 1;
+</div>
 
-      $sqlCount = "SELECT COUNT(*) AS total FROM tbl_userinfo
+    </div>
+  <?php
+include 'dbcon.php';
+$limit = 10;
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+$sqlCount = "SELECT COUNT(*) AS total FROM tbl_userinfo
              JOIN tbl_user_level ON tbl_user_level.user_level_id = tbl_userinfo.user_id
              WHERE tbl_user_level.level = 'STUDENT'";
-      $resultCount = mysqli_query($conn, $sqlCount);
-      $rowCount = mysqli_fetch_assoc($resultCount)['total'];
-      $totalPages = ceil($rowCount / $limit);
-      $offset = ($page - 1) * $limit;
+$resultCount = mysqli_query($conn, $sqlCount);
+$rowCount = mysqli_fetch_assoc($resultCount)['total'];
+$totalPages = ceil($rowCount / $limit);
+$offset = ($page - 1) * $limit;
 
-      $sql = "SELECT tbl_userinfo.user_id, tbl_userinfo.firstname, tbl_userinfo.middlename, tbl_userinfo.lastname, tbl_userinfo.suffix, tbl_enrollment.userinfo_id, tbl_enrollment.admit_type, tbl_enrollment.grade, tbl_enrollment.program, tbl_enrollment.term, tbl_enrollment.lrn, tbl_user_status.status, tbl_user_level.level,
-              tbl_contactinfo.email, tbl_contactinfo.contact_num, tbl_contactinfo.city, tbl_contactinfo.barangay, tbl_contactinfo.street
-              FROM tbl_userinfo
-              JOIN tbl_enrollment ON tbl_userinfo.user_id = tbl_enrollment.userinfo_id
-              JOIN tbl_user_status ON tbl_userinfo.user_id = tbl_user_status.userinfo_id
-              JOIN tbl_user_level ON tbl_userinfo.user_id = tbl_user_level.userinfo_id
-              JOIN tbl_contactinfo ON tbl_userinfo.user_id = tbl_contactinfo.userinfo_id
-              WHERE tbl_user_level.level = 'STUDENT'      
-              LIMIT $limit OFFSET $offset";
+$sql = "SELECT tbl_userinfo.user_id, tbl_userinfo.firstname, tbl_userinfo.middlename, tbl_userinfo.lastname, tbl_userinfo.suffix, tbl_contactinfo.email, tbl_enrollment.userinfo_id, tbl_enrollment.admit_type, tbl_contactinfo.contact_num, tbl_enrollment.term, tbl_enrollment.lrn, tbl_enrollment.lsa, tbl_user_status.status, tbl_user_level.level
+        FROM tbl_userinfo
+        JOIN tbl_enrollment ON tbl_userinfo.user_id = tbl_enrollment.userinfo_id
+        JOIN tbl_user_status ON tbl_userinfo.user_id = tbl_user_status.userinfo_id
+        JOIN tbl_user_level ON tbl_userinfo.user_id = tbl_user_level.userinfo_id
+        JOIN tbl_contactinfo ON tbl_userinfo.user_id = tbl_contactinfo.userinfo_id
+        WHERE tbl_user_level.level = 'STUDENT'
+        LIMIT $limit OFFSET $offset";
 
-      $result = mysqli_query($conn, $sql);
-      ?>
+$result = mysqli_query($conn, $sql);
+?>
 
       <table class="table table-striped table-hover" id="student_table">
         <thead>
           <tr>
             <th>ID</th>
             <th>Full Name</th>
-            <th>Admit Type</th>
-            <th>Grade</th>
-            <th>Program/Strand</th>
-            <th>Term</th>
-            <th>LRN</th>
+            <th>Email Address</th>
+            <th>Contact Number</th>
             <th>Actions</th>
             <th>Status</th>
           </tr>
@@ -250,28 +347,27 @@
           <tr>
             <td><?php echo $row['user_id'] ?></td>
             <td><?php echo $row['firstname'] . ' ' . $row['middlename'] . ' ' . $row['lastname'] . ' ' . $row['suffix']; ?></td>
-            <td><?php echo $row['admit_type']; ?></td>
-            <td><?php echo $row['grade']; ?></td>
-            <td><?php echo $row['program'] ?></td>
-            <td><?php echo $row['term'] ?></td>
-            <td><?php echo $row['lrn'] ?></td>
+            <td><?php echo $row['email']; ?></td>
+            <td><?php echo $row['contact_num']; ?></td>
+           
             <td>
-            <a href="admin_confirm.php?user_id=<?php echo $row['user_id']?>&status=<?php echo $row['status']?>" class="confirm">
+        
+            <a href="admin_acc_edit.php?user_id=<?php echo $row['user_id']?>&userinfo_id=<?php echo $row['userinfo_id']?>" class="confirm">
+                <i class="material-icons" data-toggle="tooltip" title="Edit">create</i>
+            </a>
+            <a href="admin_confirm.php?user_id=<?php echo $row['user_id']?>" class="confirm">
                 <i class="material-icons" data-toggle="tooltip" title="Confirm">&#xE5CA;</i>
             </a>
-            <a href="admin_decline.php?user_id=<?php echo $row['user_id']?>&status=<?php echo $row['status']?>" class="decline">
+            <a href="admin_student_deactivate.php?user_id=<?php echo $row['user_id']?>" class="decline">
                 <i class="material-icons" data-toggle="tooltip" title="Decline">&#xE5CD;</i>
-            </a>
-            <a href="admin_edit.php?user_id=<?php echo $row['user_id']?>&userinfo_id=<?php echo $row['userinfo_id']?>" class="edit">
-                <i class="material-icons" data-toggle="tooltip" title="Edit">create</i>
             </a>
             </td>
             <td>
             <?php
-            if($row['status'] == 0){
-              echo '<i class="material-icons" data-toggle="tooltip" title="Pending">access_time</i>';
+            if($row['status'] == 1){
+              echo '<span class="active">ACTIVE</span>';
             } else {
-              echo '<i class="material-icons" data-toggle="tooltip" title="Accepted">check</i>';
+              echo '<span class="inactive">INACTIVE</span>';
             }
             ?>
             </td>
@@ -302,30 +398,134 @@
     <?php endif; ?>
   </ul>
 </div>
-
 </div>
 
-			  </div>
-			 
-			 
-			 <!---footer---->
-			 
-			 
-		</div>
-		
+<!-- Add New Student Modal -->
+<div id="addEmployeeModal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form action="admin_add_account.php" method="POST">
+        <div class="modal-header">
+          <h5 class="modal-title">Add Admin</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="error" id="error" style="display: none;"></div>
+          <div>
+            <label style="margin-bottom: 20px;">Personal Information</label>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mt-md-0 mt-3">
+              <div class="form-group">
+                <label>First Name <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" name="firstname" required>
+              </div>
+            </div>
+            <div class="col-md-6 mt-md-0 mt-3">
+              <div class="form-group">
+                <label>Middle Name</label>
+                <input type="text" class="form-control" name="middlename">
+              </div>
+            </div>
+            <div class="col-md-6 mt-md-0 mt-3">
+              <div class="form-group">
+                <label>Last Name <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" name="lastname" required>
+              </div>
+            </div>
+            <div class="col-md-6 mt-md-0 mt-3">
+              <div class="form-group">
+                <label>Suffix Name</label>
+                <input type="text" class="form-control" name="suffixname">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mt-md-0 mt-3">
+              <div class="form-group">
+                <label>Age <span style="color: red;">*</span></label>
+                <input type="number" class="form-control" name="age" required>
+              </div>
+            </div>
+            <div class="col-md-6 mt-md-0 mt-3">
+              <div class="form-group">
+                <label>Birthday <span style="color: red;">*</span></label>
+                <input type="date" class="form-control" name="birthday" required>
+              </div>
+            </div>
+            <div class="col-md-6 mt-md-0 mt-3">
+              <div class="form-group">
+                <label>Gender <span style="color: red;">*</span></label>
+                <select class="form-control" name="gender" required>
+                  <option value="" selected hidden>Select Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="prefer">Prefer not to say</option>
+                </select>
+              </div>
+            </div>
+          </div>
 
+          
+          <div class="row">
+            <div class="col-md-6 mt-md-0 mt-3">
+              <div class="form-group">
+                <label>Email <span style="color: red;">*</span></label>
+                <input type="email" class="form-control" name="email" required>
+              </div>
+            </div>
+            <div class="col-md-6 mt-md-0 mt-3">
+              <div class="form-group">
+                <label>Contact Number <span style="color: red;">*</span></label>
+                <input type="tel" class="form-control" name="contact_number" required>
+              </div>
+            </div>
+            <div class="h3">Current Address</div>
+            <div class="col-md-6 mt-md-0 mt-3">
+              <div class="form-group">
+                <label>Street <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" name="street" required>
+              </div>
+            </div>
+            <div class="col-md-6 mt-md-0 mt-3">
+              <div class="form-group">
+                <label>Barangay <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" name="barangay" required>
+              </div>
+            </div>
+            <div class="col-md-6 mt-md-0 mt-3">
+              <div class="form-group">
+                <label>City <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" name="city" required>
+              </div>
+            </div>
+          </div>
+         
+
+        </div><br>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary" name="btnAdd">Add</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
-</div>
+
 
 
 <!----------html code compleate----------->
+
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
 <script>
 // Get the input element, button, and table
 var input = document.getElementById("searchInput");
 var button = document.getElementById("searchButton");
-var table = document.getElementById("pending_table");
+var table = document.getElementById("student_table");
 
 // Add event listener for the button click
 button.addEventListener("click", function(event) {
@@ -357,7 +557,6 @@ button.addEventListener("click", function(event) {
 });
 </script>
 
-
   
      <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -380,7 +579,6 @@ button.addEventListener("click", function(event) {
 		   });
 		  
 		});
-		
 </script>
   
   

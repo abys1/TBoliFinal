@@ -262,6 +262,9 @@ $sql = "SELECT tbl_userinfo.user_id, tbl_userinfo.firstname, tbl_userinfo.middle
         JOIN tbl_user_status ON tbl_userinfo.user_id = tbl_user_status.userinfo_id
         JOIN tbl_user_level ON tbl_userinfo.user_id = tbl_user_level.userinfo_id
         JOIN tbl_contactinfo ON tbl_userinfo.user_id = tbl_contactinfo.userinfo_id
+        -- JOIN tbl_subjects ON tbl_userinfo.user_id = tbl_subjects.userinfo_id
+        JOIN tbl_subjects ON tbl_userinfo.user_id = tbl_subjects.userinfo_id
+
         WHERE tbl_user_level.level = 'STUDENT'
         LIMIT $limit OFFSET $offset";
 
@@ -283,16 +286,14 @@ $result = mysqli_query($conn, $sql);
         <tbody>
           <?php foreach ($result as $row): ?>  
           <tr>
-            <td><?php echo $row['user_id'] ?></td>
+            <td><?php echo $row['subject_id'] ?></td>
             <td><?php echo $row['firstname'] . ' ' . $row['middlename'] . ' ' . $row['lastname'] . ' ' . $row['suffix']; ?></td>
             <td><?php echo $row['email']; ?></td>
             <td><?php echo $row['contact_num']; ?></td>
             <td><?php echo $row['area']; ?></td>
            
             <td>
-            <a href="admin_add_teacher_acc.php?user_id=<?php echo $row['user_id']?>&userinfo_id=<?php echo $row['userinfo_id']?>" class="edit">
-                <i class="material-icons" data-toggle="tooltip" title="Add Teacher Account">add</i>
-            </a>
+         
             <a href="admin_teacher_edit.php?user_id=<?php echo $row['user_id']?>&userinfo_id=<?php echo $row['userinfo_id']?>" class="confirm">
                 <i class="material-icons" data-toggle="tooltip" title="Edit">create</i>
             </a>

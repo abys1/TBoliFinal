@@ -24,7 +24,30 @@
 <body>
 <div class="wrapper rounded bg-white custom-wrapper">
 
+<?php
+include 'dbcon.php';
+$limit = 10;
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
 
+$sqlCount = "SELECT COUNT(*) AS total FROM tbl_userinfo
+             JOIN tbl_user_level ON tbl_user_level.user_level_id = tbl_userinfo.user_id
+             WHERE tbl_user_level.level = 'STUDENT'";
+$resultCount = mysqli_query($conn, $sqlCount);
+$rowCount = mysqli_fetch_assoc($resultCount)['total'];
+$totalPages = ceil($rowCount / $limit);
+$offset = ($page - 1) * $limit;
+
+$sql = "SELECT tbl_userinfo.user_id, tbl_userinfo.firstname, tbl_userinfo.middlename, tbl_userinfo.lastname, tbl_userinfo.suffix, tbl_contactinfo.email, tbl_enrollment.userinfo_id, tbl_enrollment.admit_type, tbl_contactinfo.contact_num, tbl_enrollment.term, tbl_enrollment.lrn, tbl_enrollment.lsa, tbl_user_status.status, tbl_user_level.level
+        FROM tbl_userinfo
+        JOIN tbl_enrollment ON tbl_userinfo.user_id = tbl_enrollment.userinfo_id
+        JOIN tbl_user_status ON tbl_userinfo.user_id = tbl_user_status.userinfo_id
+        JOIN tbl_user_level ON tbl_userinfo.user_id = tbl_user_level.userinfo_id
+        JOIN tbl_contactinfo ON tbl_userinfo.user_id = tbl_contactinfo.userinfo_id
+        WHERE tbl_user_level.level = 'STUDENT'
+        LIMIT $limit OFFSET $offset";
+
+$result = mysqli_query($conn, $sql);
+?>
 
 <div class="h3">Add Admin Account</div>
 <p> You can add admin account here.</p>

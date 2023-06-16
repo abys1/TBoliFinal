@@ -10,14 +10,20 @@
 }
 
 body {
-    background: linear-gradient(45deg, #9f1ece, #007bc7);
+    background: linear-gradient(45deg, #979099, rgb(71, 133, 172));
     min-height: 100vh;
 }
 
 body::-webkit-scrollbar {
     display: none;
 }
-
+.h3 {
+    margin-top: 25px; /* Adjust the value as per your requirements */
+    text-align: center;
+  }
+p{
+    
+}
 .wrapper {
     max-width: 800px;
     margin: 80px auto;

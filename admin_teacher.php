@@ -233,15 +233,15 @@
     }
     ?>
       <div class="row">
-        <div class="col-sm-6 p-0 d-flex justify-content-lg-start justify-content-center">
-          <h2 class="ml-lg-2">Manage Teacher</h2>
-        </div>
-        <div class="col-sm-6 p-0 d-flex justify-content-lg-end justify-content-center">
-          <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal">
-		  <i class="material-icons">&#xE147;</i> <span>Add New Teacher</span></a>
-
-        </div>
-      </div>
+    <div class="col-sm-6 p-0 d-flex justify-content-lg-start justify-content-center">
+        <h2 class="ml-lg-2">Manage Student</h2>
+    </div>
+    <div class="col-sm-6 p-0 d-flex justify-content-lg-end justify-content-center">
+        <a href="admin_add_teacher_acc.php" class="btn btn-success">
+            <i class="material-icons">&#xE147;</i> <span>Add New Student</span>
+        </a>
+    </div>
+</div>
     </div>
   <?php
 include 'dbcon.php';

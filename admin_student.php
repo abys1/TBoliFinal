@@ -235,16 +235,17 @@
     </div>';
     }
     ?>
-      <div class="row">
-        <div class="col-sm-6 p-0 d-flex justify-content-lg-start justify-content-center">
-          <h2 class="ml-lg-2">Manage Student</h2>
-        </div>
-        <div class="col-sm-6 p-0 d-flex justify-content-lg-end justify-content-center">
-          <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal">
-		  <i class="material-icons">&#xE147;</i> <span>Add New Student</span></a>
+    <div class="row">
+    <div class="col-sm-6 p-0 d-flex justify-content-lg-start justify-content-center">
+        <h2 class="ml-lg-2">Manage Student</h2>
+    </div>
+    <div class="col-sm-6 p-0 d-flex justify-content-lg-end justify-content-center">
+        <a href="admin_add_student_acc.php" class="btn btn-success">
+            <i class="material-icons">&#xE147;</i> <span>Add New Student</span>
+        </a>
+    </div>
+</div>
 
-        </div>
-      </div>
     </div>
     <?php
 include 'dbcon.php';
@@ -278,6 +279,7 @@ $result = mysqli_query($conn, $sql);
             <th>Full Name</th>
             <th>Grade/Batch</th>
             <th>Area</th>
+            <th></th>
             <th>Actions</th>
             <th>Status</th>
           </tr>
@@ -289,12 +291,11 @@ $result = mysqli_query($conn, $sql);
             <td><?php echo $row['firstname'] . ' ' . $row['middlename'] . ' ' . $row['lastname'] . ' ' . $row['suffix']; ?></td>
             <td><?php echo $row['grade']; ?></td>
             <td><?php echo $row['area'];?></td>
+            
             <td></td>
  
             <td>
-            <a href="admin_student_add_account.php?user_id=<?php echo $row['user_id']?>&userinfo_id=<?php echo $row['userinfo_id']?>" class="edit">
-                <i class="material-icons" data-toggle="tooltip" title="Add Student Account">add</i>
-            </a>
+        
             <a href="admin_student_edit.php?user_id=<?php echo $row['user_id']?>&userinfo_id=<?php echo $row['userinfo_id']?>" class="confirm">
                 <i class="material-icons" data-toggle="tooltip" title="Edit">create</i>
             </a>

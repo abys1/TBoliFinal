@@ -306,26 +306,25 @@
 </div>
 
     </div>
-  <?php
+<?php
 include 'dbcon.php';
 $limit = 10;
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 
-$sqlCount = "SELECT COUNT(*) AS total FROM tbl_userinfo
-             JOIN tbl_user_level ON tbl_user_level.user_level_id = tbl_userinfo.user_id
-             WHERE tbl_user_level.level = 'STUDENT'";
+$sqlCount = "SELECT COUNT(*) AS total FROM tbl_admin
+             JOIN tbl_user_level ON tbl_user_level.level_id = tbl_admin.level_id
+             WHERE tbl_user_level.level = 'ADMIN'";
 $resultCount = mysqli_query($conn, $sqlCount);
 $rowCount = mysqli_fetch_assoc($resultCount)['total'];
 $totalPages = ceil($rowCount / $limit);
 $offset = ($page - 1) * $limit;
 
-$sql = "SELECT tbl_userinfo.user_id, tbl_userinfo.firstname, tbl_userinfo.middlename, tbl_userinfo.lastname, tbl_userinfo.suffix, tbl_contactinfo.email, tbl_enrollment.userinfo_id, tbl_enrollment.admit_type, tbl_contactinfo.contact_num, tbl_enrollment.term, tbl_enrollment.lrn, tbl_enrollment.lsa, tbl_user_status.status, tbl_user_level.level
-        FROM tbl_userinfo
-        JOIN tbl_enrollment ON tbl_userinfo.user_id = tbl_enrollment.userinfo_id
-        JOIN tbl_user_status ON tbl_userinfo.user_id = tbl_user_status.userinfo_id
-        JOIN tbl_user_level ON tbl_userinfo.user_id = tbl_user_level.userinfo_id
-        JOIN tbl_contactinfo ON tbl_userinfo.user_id = tbl_contactinfo.userinfo_id
-        WHERE tbl_user_level.level = 'STUDENT'
+$sql = "SELECT tbl_admin.admin_id, tbl_userinfo.firstname, tbl_userinfo.middlename, tbl_userinfo.lastname, tbl_userinfo.suffixname, tbl_usercredentials.email, tbl_usercredentials.contact, tbl_address.street, tbl_address.barangay, tbl_address.city, tbl_user_level.level FROM tbl_admin
+        JOIN tbl_userinfo ON tbl_admin.user_id = tbl_userinfo.user_id
+        JOIN tbl_usercredentials ON tbl_admin.credentials_id = tbl_usercredentials.usercredentials_id
+        JOIN tbl_address ON tbl_admin.address_id = tbl_address.address_id
+        JOIN tbl_user_level ON tbl_admin.level_id = tbl_user_level.level_id
+        WHERE tbl_user_level.level = 'ADMIN'
         LIMIT $limit OFFSET $offset";
 
 $result = mysqli_query($conn, $sql);
@@ -345,30 +344,30 @@ $result = mysqli_query($conn, $sql);
         <tbody>
           <?php foreach ($result as $row): ?>  
           <tr>
-            <td><?php echo $row['user_id'] ?></td>
-            <td><?php echo $row['firstname'] . ' ' . $row['middlename'] . ' ' . $row['lastname'] . ' ' . $row['suffix']; ?></td>
+            <td><?php echo $row['admin_id'] ?></td>
+            <td><?php echo $row['firstname'] . ' ' . $row['middlename'] . ' ' . $row['lastname'] . ' ' . $row['suffixname']; ?></td>
             <td><?php echo $row['email']; ?></td>
-            <td><?php echo $row['contact_num']; ?></td>
+            <td><?php echo $row['contact']; ?></td>
            
             <td>
         
-            <a href="admin_acc_edit.php?user_id=<?php echo $row['user_id']?>&userinfo_id=<?php echo $row['userinfo_id']?>" class="confirm">
+            <!-- <a href="admin_acc_edit.php?user_id=<?php echo $row['user_id']?>&userinfo_id=<?php echo $row['userinfo_id']?>" class="confirm"> -->
                 <i class="material-icons" data-toggle="tooltip" title="Edit">create</i>
             </a>
-            <a href="admin_confirm.php?user_id=<?php echo $row['user_id']?>" class="confirm">
+            <!-- <a href="admin_confirm.php?user_id=<?php echo $row['user_id']?>" class="confirm"> -->
                 <i class="material-icons" data-toggle="tooltip" title="Confirm">&#xE5CA;</i>
             </a>
-            <a href="admin_student_deactivate.php?user_id=<?php echo $row['user_id']?>" class="decline">
+            <!-- <a href="admin_student_deactivate.php?user_id=<?php echo $row['user_id']?>" class="decline"> -->
                 <i class="material-icons" data-toggle="tooltip" title="Decline">&#xE5CD;</i>
             </a>
             </td>
             <td>
             <?php
-            if($row['status'] == 1){
-              echo '<span class="active">ACTIVE</span>';
-            } else {
-              echo '<span class="inactive">INACTIVE</span>';
-            }
+            // if($row['status'] == 1){
+            //   echo '<span class="active">ACTIVE</span>';
+            // } else {
+            //   echo '<span class="inactive">INACTIVE</span>';
+            // }
             ?>
             </td>
           </tr>

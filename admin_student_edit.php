@@ -114,6 +114,10 @@ if (isset($_GET['user_id']) && isset($_GET['userinfo_id'])) {
 <div class="form">
     <form action="" method="POST">
     <div class="row">
+    <div class="col-md-6 mt-md-0 mt-3">
+            <label>Learner's ID <span style="color: red;">*</span></label>
+            <input type="text" class="form-control" name="learnerID" >
+        </div>
         <div class="col-md-6 mt-md-0 mt-3">
             <label>First Name <span style="color: red;">*</span></label>
             <input type="text" class="form-control" name="firstname" value="<?php echo $row['firstname'] ?>">

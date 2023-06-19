@@ -26,34 +26,58 @@
 
 <?php
 include 'dbcon.php';
-$limit = 10;
-$page = isset($_GET['page']) ? $_GET['page'] : 1;
 
-$sqlCount = "SELECT COUNT(*) AS total FROM tbl_userinfo
-             JOIN tbl_user_level ON tbl_user_level.user_level_id = tbl_userinfo.user_id
-             WHERE tbl_user_level.level = 'STUDENT'";
-$resultCount = mysqli_query($conn, $sqlCount);
-$rowCount = mysqli_fetch_assoc($resultCount)['total'];
-$totalPages = ceil($rowCount / $limit);
-$offset = ($page - 1) * $limit;
+if (isset($_POST['btnAdd'])) {
 
-$sql = "SELECT tbl_userinfo.user_id, tbl_userinfo.firstname, tbl_userinfo.middlename, tbl_userinfo.lastname, tbl_userinfo.suffix, tbl_contactinfo.email, tbl_enrollment.userinfo_id, tbl_enrollment.admit_type, tbl_contactinfo.contact_num, tbl_enrollment.term, tbl_enrollment.lrn, tbl_enrollment.lsa, tbl_user_status.status, tbl_user_level.level
-        FROM tbl_userinfo
-        JOIN tbl_enrollment ON tbl_userinfo.user_id = tbl_enrollment.userinfo_id
-        JOIN tbl_user_status ON tbl_userinfo.user_id = tbl_user_status.userinfo_id
-        JOIN tbl_user_level ON tbl_userinfo.user_id = tbl_user_level.userinfo_id
-        JOIN tbl_contactinfo ON tbl_userinfo.user_id = tbl_contactinfo.userinfo_id
-        WHERE tbl_user_level.level = 'STUDENT'
-        LIMIT $limit OFFSET $offset";
+  $firstname = $_POST['firstname'];
+  $middlename = $_POST['middlename'];
+  $lastname = $_POST['lastname'];
+  $suffix = $_POST['suffixname'];
+  $birthday = $_POST['birthday'];
+  $gender = $_POST['gender'];
+  $email = $_POST['email'];
+  $contact = $_POST['contact_number'];
+  $valid_id = $_POST['valid_id'];
+  $street = $_POST['street'];
+  $barangay = $_POST['barangay'];
+  $city = $_POST['city'];
 
-$result = mysqli_query($conn, $sql);
+  $sql = "INSERT INTO tbl_userinfo (firstname, middlename, lastname, suffixname, birthday, gender) VALUES ('$firstname', '$middlename', '$lastname', '$suffix', '$birthday', '$gender')";
+
+  if ($conn->query($sql) === TRUE) {
+    $user_id = $conn->insert_id;
+    $sql = "INSERT INTO tbl_usercredentials (email, contact, valid_id) VALUES ('$email', '$contact', '$valid_id')";
+
+    if ($conn->query($sql) === TRUE) {
+
+      $credentials_id = $conn->insert_id;
+      $sql = "INSERT INTO tbl_address (street, barangay, city) VALUES ('$street', '$barangay', '$city')";
+
+      if ($conn->query($sql) === TRUE) {
+        $address_id = $conn->insert_id;
+        $sql = "INSERT INTO tbl_user_level (level) VALUES ('TEACHER')";
+
+        if ($conn->query($sql) === TRUE) {
+          $level_id = $conn->insert_id;
+          $sql = "INSERT INTO tbl_admin (user_id, credentials_id, address_id, level_id) VALUES ('$user_id', '$credentials_id', '$address_id', '$level_id')";
+
+          if ($conn->query($sql) === TRUE) {
+            echo ('Added successfully!');
+          }
+        }
+      }
+    }
+  }
+}
 ?>
+
+
 
 <div class="h3">Add Admin Account</div>
 <p> You can add admin account here.</p>
 
 
- 
+      <form action="#" method="POST">
         <div class="modal-body">
           <div class="error" id="error" style="display: none;"></div>
           <div>

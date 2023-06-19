@@ -252,21 +252,19 @@ include 'dbcon.php';
 $limit = 10;
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 
-$sqlCount = "SELECT COUNT(*) AS total FROM tbl_userinfo
-             JOIN tbl_user_level ON tbl_user_level.user_level_id = tbl_userinfo.user_id
-             WHERE tbl_user_level.level = 'STUDENT'";
+$sqlCount = "SELECT COUNT(*) AS total FROM tbl_learner
+             JOIN tbl_user_level ON tbl_user_level.level_id = tbl_learner.user_id
+             WHERE tbl_user_level.level = 'LEARNER'";
 $resultCount = mysqli_query($conn, $sqlCount);
 $rowCount = mysqli_fetch_assoc($resultCount)['total'];
 $totalPages = ceil($rowCount / $limit);
 $offset = ($page - 1) * $limit;
 
-$sql = "SELECT tbl_userinfo.user_id, tbl_userinfo.firstname, tbl_userinfo.middlename, tbl_userinfo.lastname, tbl_userinfo.suffix, tbl_contactinfo.area, tbl_enrollment.userinfo_id, tbl_enrollment.admit_type, tbl_enrollment.grade, tbl_enrollment.program, tbl_enrollment.term, tbl_enrollment.lrn, tbl_enrollment.lsa, tbl_user_status.status, tbl_user_level.level
-        FROM tbl_userinfo
-        JOIN tbl_enrollment ON tbl_userinfo.user_id = tbl_enrollment.userinfo_id
-        JOIN tbl_user_status ON tbl_userinfo.user_id = tbl_user_status.userinfo_id
-        JOIN tbl_user_level ON tbl_userinfo.user_id = tbl_user_level.userinfo_id
-        JOIN tbl_contactinfo ON tbl_userinfo.user_id = tbl_contactinfo.userinfo_id
-        WHERE tbl_user_level.level = 'STUDENT'
+$sql = "SELECT tbl_learner.learners_id, tbl_userinfo.firstname, tbl_userinfo.middlename, tbl_userinfo.lastname, tbl_userinfo.suffixname, tbl_address.street, tbl_address.barangay, tbl_address.city, tbl_user_level.level FROM tbl_learner
+        JOIN tbl_userinfo ON tbl_learner.user_id = tbl_userinfo.user_id
+        JOIN tbl_address ON tbl_learner.address_id = tbl_address.address_id
+        JOIN tbl_user_level ON tbl_learner.level_id = tbl_user_level.level_id
+        WHERE tbl_user_level.level = 'LEARNER'
         LIMIT $limit OFFSET $offset";
 
 $result = mysqli_query($conn, $sql);
@@ -277,9 +275,9 @@ $result = mysqli_query($conn, $sql);
           <tr>
             <th>ID</th>
             <th>Full Name</th>
-            <th>Grade/Batch</th>
-            <th>Area</th>
-            <th></th>
+            <th>Street</th>
+            <th>Barangay</th>
+            <th>City</th>
             <th>Actions</th>
             <th>Status</th>
           </tr>
@@ -287,33 +285,31 @@ $result = mysqli_query($conn, $sql);
         <tbody>
           <?php foreach ($result as $row): ?>  
           <tr>
-            <td><?php echo $row['user_id'] ?></td>
-            <td><?php echo $row['firstname'] . ' ' . $row['middlename'] . ' ' . $row['lastname'] . ' ' . $row['suffix']; ?></td>
-            <td><?php echo $row['grade']; ?></td>
-            <td><?php echo $row['area'];?></td>
-            
-            <td></td>
- 
+            <td><?php echo $row['learners_id'] ?></td>
+            <td><?php echo $row['firstname'] . ' ' . $row['middlename'] . ' ' . $row['lastname'] . ' ' . $row['suffixname']; ?></td>
+            <td><?php echo $row['street']; ?></td>
+            <td><?php echo $row['barangay'];?></td>
+            <td><?php echo $row['city'];?></td>
             <td>
         
-            <a href="admin_student_edit.php?user_id=<?php echo $row['user_id']?>&userinfo_id=<?php echo $row['userinfo_id']?>" class="confirm">
+            <!-- <a href="admin_student_edit.php?user_id=<?php echo $row['user_id']?>&userinfo_id=<?php echo $row['userinfo_id']?>" class="confirm"> -->
                 <i class="material-icons" data-toggle="tooltip" title="Edit">create</i>
             </a>
-            <a href="admin_student_activate.php?user_id=<?php echo $row['user_id']?>" class="confirm">
+            <!-- <a href="admin_student_activate.php?user_id=<?php echo $row['user_id']?>" class="confirm"> -->
                 <i class="material-icons" data-toggle="tooltip" title="Confirm">&#xE5CA;</i>
             </a>
-            <a href="admin_student_deactivate.php?user_id=<?php echo $row['user_id']?>" class="decline">
+            <!-- <a href="admin_student_deactivate.php?user_id=<?php echo $row['user_id']?>" class="decline"> -->
                 <i class="material-icons" data-toggle="tooltip" title="Decline">&#xE5CD;</i>
             </a>
             </td>
             <td>
             <?php
-            if($row['status'] == 1){
-              echo '<span class="active">ACTIVE</span>';
-            } else {
-              echo '<span class="inactive">INACTIVE</span>';
-            }
-            ?>
+            // if($row['status'] == 1){
+            //   echo '<span class="active">ACTIVE</span>';
+            // } else {
+            //   echo '<span class="inactive">INACTIVE</span>';
+            // }
+            // ?>
             </td>
           </tr>
           <?php endforeach; ?>

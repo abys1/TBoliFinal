@@ -2,7 +2,7 @@
 $sname = "localhost";
 $uname = "root";
 $password = "";
-$dbname = "enrollmentdb";
+$dbname = "tbolidb";
 
 $conn = mysqli_connect($sname, $uname, $password, $dbname);
 

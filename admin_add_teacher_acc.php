@@ -24,13 +24,58 @@
 <body>
 <div class="wrapper rounded bg-white custom-wrapper">
 
+<?php
+include 'dbcon.php';
 
+if (isset($_POST['btnAdd'])) {
+
+  $firstname = $_POST['firstname'];
+  $middlename = $_POST['middlename'];
+  $lastname = $_POST['lastname'];
+  $suffix = $_POST['suffixname'];
+  $birthday = $_POST['birthday'];
+  $gender = $_POST['gender'];
+  $email = $_POST['email'];
+  $contact = $_POST['contact_number'];
+  $valid_id = $_POST['valid_id'];
+  $street = $_POST['street'];
+  $barangay = $_POST['barangay'];
+  $city = $_POST['city'];
+
+  $sql = "INSERT INTO tbl_userinfo (firstname, middlename, lastname, suffixname, birthday, gender) VALUES ('$firstname', '$middlename', '$lastname', '$suffix', '$birthday', '$gender')";
+
+  if ($conn->query($sql) === TRUE) {
+    $user_id = $conn->insert_id;
+    $sql = "INSERT INTO tbl_usercredentials (email, contact, valid_id) VALUES ('$email', '$contact', '$valid_id')";
+
+    if ($conn->query($sql) === TRUE) {
+
+      $credentials_id = $conn->insert_id;
+      $sql = "INSERT INTO tbl_address (street, barangay, city) VALUES ('$street', '$barangay', '$city')";
+
+      if ($conn->query($sql) === TRUE) {
+        $address_id = $conn->insert_id;
+        $sql = "INSERT INTO tbl_user_level (level) VALUES ('TEACHER')";
+
+        if ($conn->query($sql) === TRUE) {
+          $level_id = $conn->insert_id;
+          $sql = "INSERT INTO tbl_teachers (user_id, credentials_id, address_id, level_id) VALUES ('$user_id', '$credentials_id', '$address_id', '$level_id')";
+
+          if ($conn->query($sql) === TRUE) {
+            echo ('Added successfully!');
+          }
+        }
+      }
+    }
+  }
+}
+?>
 
 <div class="h3">Add Teacher Account</div>
 <p> You can add Teacher account here.</p>
 
 
- 
+      <form action="#" method="POST">
         <div class="modal-body">
           <div class="error" id="error" style="display: none;"></div>
           <div>
